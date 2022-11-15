@@ -11,21 +11,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    @if(User.Identity.IsAuthenticated){
-        <div class="alert alert-info">
-            Usuario Autenticado:
-            <ul>
-                <li>@SesionHelper.GetNameIdentifier(User)</li>
-                <li>@SesionHelper.GetName(User)</li>
-                <li>@((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Email).Value</li>
-                <li>@SesionHelper.GetValue(User, "Email")</li>
-            </ul>
-        </div>
-    }else{
-        <div class="alert-danger">
-            Usuario No Autenticado
-        </div>
-    }
+
     <div>
         <main role="main">
             @RenderBody()

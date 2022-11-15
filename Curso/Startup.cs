@@ -35,7 +35,9 @@ namespace Curso
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-            }).AddCookie(options => { options.LoginPath = "/Login"; });
+            }).AddCookie(options => { options.LoginPath = "/Login";
+                options.Events.OnRedirectToAccessDenied = context => { context.Response.Redirect("/Login"); return Task.CompletedTask; };
+            });
         }
        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

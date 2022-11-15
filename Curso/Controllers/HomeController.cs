@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Curso.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         CodeStackCTX ctx;
@@ -36,7 +37,8 @@ namespace Curso.Controllers
         {
             return View();
         }
-        public async Task <IActionResult> Registro()
+        [AllowAnonymous]
+        public IActionResult Registro()
         {
             return View();
         }

@@ -19,23 +19,25 @@
     });
 });
 
-$(document).on('submit', '#Index', function (e) {
+$(document).on('submit', '#Login', function (e) {
     e.preventDefault();
     $.ajax({
         beforeSend: function () {
-            $('#Index button[type=submit]').prop('disabled', true);
+            $('#Login button[type=submit]').prop('disabled', true);
         },
         type: this.method,
         url: this.action,
         data: $(this).serialize(),
         success: function (data) {
-            alert('Bienvenido ');
+    
+            window.location = "/Home";
         },
         error: function (xhr, status) {
             alert(xhr.responseJSON.Message);
+            
         },
         complete: function () {
-            $('#Index button[type=submit]').prop('disabled', false);
+            $('#Login button[type=submit]').prop('disabled', false);
         }
     });
 });

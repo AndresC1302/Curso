@@ -24,32 +24,54 @@ namespace Curso.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Home");
+            }
+            else
+            {
+                return View();
+
+            }
+            
         }
         [BindProperty]
         public UsuarioVM Usuario { get; set; }
-        public async Task <IActionResult> Login()
+        public async Task<IActionResult> Login()
         {
             if (!ModelState.IsValid)
             {
                     return BadRequest(new JObject() { { "StatusCode", 400 }, { "Message", "El usuario ya existe, seleccione otro" } });
-                
+                 
             }
             else
             {
-                var result = await ctx.Usuarios.Where(x => x.Nombre == Usuario.Nombre).SingleOrDefaultAsync();
+                var result = await ctx.Usuarios.Include("Roles.Rol").Where(x => x.Nombre == Usuario.Nombre).SingleOrDefaultAsync();
                 if (result == null)
                 {
                     return NotFound((new JObject() { { "StatusCode", 404 }, { "Message", "Usuario no encontrado" } }));
                 }
                 else
                 {
+                    if (result.Roles.Count == 0)
+                    {
+                        var response = new JObject()
+                        {
+                            {"StatusCode", 403 },
+                            {"Message", "Usuario o contraseña no valido"}
+                        };
+                        return StatusCode(403, response);
+                    }
                     if (HashHelper.CheckHash(Usuario.Clave, result.Clave, result.Sal))
                     {
                         var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
                         identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, result.IdUsuario.ToString()));
                         identity.AddClaim(new Claim(ClaimTypes.Name, result.Nombre));
                         identity.AddClaim(new Claim(ClaimTypes.Email, "Este es su correo"));
+                        foreach(var Rol in result.Roles)
+                        {
+                            identity.AddClaim(new Claim(ClaimTypes.Role, Rol.Rol.Descripcion));
+                        }
                         var principal=new ClaimsPrincipal(identity);
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { ExpiresUtc=DateTime.Now.AddDays(1),IsPersistent =true});
                         return Ok(result); 
@@ -66,6 +88,11 @@ namespace Curso.Controllers
                 }
             }
            
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/Login");
         }
         
     }
