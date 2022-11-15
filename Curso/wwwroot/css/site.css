@@ -1,0 +1,122 @@
+:root {
+    --primary: #fff;
+    --black: #000;
+    --gray: #efefef;
+}
+#Create{
+    background-color:white;
+    position:relative;
+    top: 200px;
+}
+body {
+    overflow: hidden;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: var(--primary);
+    background-image: url(https://cdn.pixabay.com/photo/2018/01/11/21/27/laptop-3076957_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-primary {
+    background-color: var(--black) !important;
+}
+
+.bg-light {
+    background-color: #000 !important;
+}
+
+#sidebar-container {
+    min-height: 80vh;
+}
+
+    #sidebar-container .logo {
+        padding: .875rem 1.25rem;
+    }
+
+    #sidebar-container .menu {
+        width: 10rem;
+    }
+
+a:hover {
+    text-decoration: none;
+}
+
+.avatar {
+    max-width: 35px;
+}
+#cont {
+    position: relative;
+    border: 1px solid black;
+    width: 600px;
+    height: 600px;
+    top: 50px;
+    left: 50px;
+    border-radius: 20px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+#all {
+    background-image: url(https://cdn.pixabay.com/photo/2018/01/11/21/27/laptop-3076957_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#Title {
+    position: relative;
+    top: 40px;
+    left: 250px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#back:hover {
+    color: blue;
+    font-size: large;
+}
+
+#back {
+    position: relative;
+    top: -50px;
+    left: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#contend {
+    position: relative;
+    top: 50px;
+    left: 250px;
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#buttom {
+    position: relative;
+    top: 80px;
+    left: 450px;
+}
+
+#bot {
+    background: transparent;
+    border-radius: 4px;
+    height: 30px;
+    width: 50px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+    #bot:hover {
+        background-color: lightgray;
+        color: black;
+    }
+
+#forgot {
+    position: relative;
+    width: 120px;
+    top: 47px;
+    left: 300px;
+}
+
+    #forgot:hover {
+        color: blue;
+    }

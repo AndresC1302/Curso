@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+    <style>
+        #usuarios{
+           position:relative;
+           left:100px;
+        }
+        #contraseñas{
+            position: relative;
+            left: 100px;
+        }
+        #bot{
+            position: relative;
+            left: 250px;
+        }
+        #forgot{
+            position: relative;
+            left: 100px;
+            top:-20px;
+        }
+    </style>
+</head>
+<body id="all">
+    <article id="cont">
+
+        <div id="Title" class="text-dark">
+            <h2>Log in</h2>
+        </div>
+
+        <div id="back" class="text-dark">
+            Back
+        </div>
+        @model Curso.Models.ViewModel.UsuarioVM
+        <form asp-action="Index" asp-controller="Login" id="Index">
+            <div class="row" id="usuarios">
+                <div class="form-group col-md-3" >
+                    <label class="text-dark">Usuario</label>
+                    <input type="text" asp-for="Nombre" class="form-control text-dark" />
+                    <span asp-validation-for="Nombre" class="text-dark"></span>
+                </div>
+            </div>
+            <div class="row" id="contraseñas">
+                <div class="form-group col-md-3">
+                    <label class="text-dark">Contraseña</label>
+                    <input type="password" asp-for="Clave" class="form-control text-dark" />
+                    <span asp-validation-for="Clave" class="text-dark"></span>
+                </div>
+            </div>
+            <div class="row" id="bot">
+                <button type="submit" class="btn-primary">Login</button>
+            </div>
+        </form>
+
+        <div id="forgot" class="text-dark align-content-lg-end">
+            ¿Did you forget<br>your password?
+        </div>
+    </article>
+    
+</body>
+</html>
+
